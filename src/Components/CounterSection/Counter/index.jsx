@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import LabeledInput from '../LabeledInput';
 import styles from './Counter.module.sass';
 import { normalizeValueInRange } from '../../../utils/utils';
 import CONSTANTS from '../../../constants';
@@ -14,16 +15,14 @@ const Counter = ({
   setIsAdd,
   step = INITIAL_STEP_VALUE,
 }) => {
-  const handleCount = () => {
+  const handleClickOperationButton = () => {
     const newCount = isAdd ? count + step : count - step;
     setCount(normalizeValueInRange(newCount));
   };
 
-  const handleChangeMode = () => {
+  const handleClickChangeMode = () => {
     setIsAdd(!isAdd);
   };
-
-  const INPUT_CHANGE_MODE_NAME = 'change-mode';
 
   return (
     <article className={styles['counter']}>
@@ -33,25 +32,21 @@ const Counter = ({
       {/* [ Add/Sub ] */}
       <button
         className={styles['counter__button-operation']}
-        onClick={handleCount}
+        onClick={handleClickOperationButton}
       >
         {isAdd ? 'Add' : 'Sub'}
       </button>
 
       {/* [V] Change mode*/}
-      <label
-        className={styles['counter__label-change-mode']}
-        htmlFor={INPUT_CHANGE_MODE_NAME}
-      >
-        <input
-          id={INPUT_CHANGE_MODE_NAME}
-          name={INPUT_CHANGE_MODE_NAME}
-          type="checkbox"
-          checked={isAdd}
-          onChange={handleChangeMode}
-        />
-        Change mode
-      </label>
+      <LabeledInput
+        blockName="counter"
+        elementName={'change-mode'}
+        type="checkbox"
+        textContent={'Change mode'}
+        isContentBefore={false}
+        checked={isAdd}
+        onChange={handleClickChangeMode}
+      />
     </article>
   );
 };

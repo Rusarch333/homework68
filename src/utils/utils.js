@@ -11,7 +11,7 @@ export const createElementBEMNameByTag = (
   modifierName
 ) => {
   const blockElementName = blockName + '__' + tagName + '-' + elementName;
-  return modifierName === undefined
+  return modifierName === null
     ? blockElementName
     : blockElementName + '--' + modifierName;
 };

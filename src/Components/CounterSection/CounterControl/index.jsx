@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import LabelInputTextGroup from '../LabelInputTextGroup';
+import LabeledInput from '../LabeledInput';
 import styles from './CounterControl.module.sass';
 import { doActionIfValueInRange } from '../../../utils/utils';
 import CONSTANTS from '../../../constants';
@@ -8,7 +8,7 @@ import CONSTANTS from '../../../constants';
 const { INITIAL_STEP_VALUE } = CONSTANTS;
 
 const ControlCounter = ({ step = INITIAL_STEP_VALUE, setStep }) => {
-  const handleStep = ({ target: { value } }) => {
+  const handleChangeStep = ({ target: { value } }) => {
     doActionIfValueInRange(Number(value), setStep);
   };
 
@@ -17,14 +17,14 @@ const ControlCounter = ({ step = INITIAL_STEP_VALUE, setStep }) => {
   return (
     <div className={styles[COMPONENT_NAME]}>
       {/* Step: 1 (1) */}
-      <LabelInputTextGroup
+      <LabeledInput
         blockName={COMPONENT_NAME}
         elementName="step"
+        type="number"
         textContent={'Step: ' + step}
         isContentBefore={true}
-        inputTextType="number"
-        inputValue={step}
-        inputOnChangeCallback={handleStep}
+        value={step}
+        onChange={handleChangeStep}
       />
     </div>
   );

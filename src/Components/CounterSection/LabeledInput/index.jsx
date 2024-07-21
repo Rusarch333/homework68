@@ -1,17 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import styles from './LabelInputTextGroup.module.sass';
+import styles from './LabeledInput.module.sass';
 import { createElementBEMNameByTag } from '../../../utils/utils';
 
-const LabelInputTextGroup = ({
+const LabeledInput = ({
   blockName,
   elementName,
-  modifierName,
+  modifierName = null,
   textContent = '',
   isContentBefore = true,
-  inputTextType = 'number',
-  inputValue,
-  inputOnChangeCallback,
+  ...props
 }) => {
   const LABEL_TAG_NAME = 'label';
   const INPUT_TAG_NAME = 'input';
@@ -34,24 +32,19 @@ const LabelInputTextGroup = ({
         className={styles[inputBEMName]}
         id={inputBEMName}
         name={inputBEMName}
-        type={inputTextType}
-        value={inputValue}
-        onChange={inputOnChangeCallback}
+        {...props}
       />
       {isContentBefore ? null : textContent}
     </label>
   );
 };
 
-LabelInputTextGroup.propTypes = {
+LabeledInput.propTypes = {
   blockName: PropTypes.string.isRequired,
   elementName: PropTypes.string.isRequired,
   modifierName: PropTypes.string,
   textContent: PropTypes.string,
   isContentBefore: PropTypes.bool,
-  inputTextType: PropTypes.string,
-  inputValue: PropTypes.number.isRequired,
-  inputOnChangeCallback: PropTypes.func.isRequired,
 };
 
-export default LabelInputTextGroup;
+export default LabeledInput;

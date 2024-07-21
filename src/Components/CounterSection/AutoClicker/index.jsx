@@ -1,27 +1,28 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import LabelInputTextGroup from '../LabelInputTextGroup';
+import LabeledInput from '../LabeledInput';
 import styles from './AutoClicker.module.sass';
 import CONSTANTS from '../../../constants';
+import CONSTANTS_AUTOCLICKER from './constants';
 import {
   normalizeValueInRange,
   makeHandlerNameByHandleValue,
 } from '../../../utils/utils';
 
+const { MIN_COUNT_RANGE, INITIAL_STEP_VALUE, INITIAL_ISADD_FLAG_VALUE } =
+  CONSTANTS;
+
 const {
-  MIN_COUNT_RANGE,
-  INITIAL_STEP_VALUE,
-  INITIAL_ISADD_FLAG_VALUE,
-  AUTOCLICKER_WORK_TIME_MODIFIER,
-  AUTOCLICK_LABEL_INPUT_TEXT_GROUPS,
-  AUTOCLICK_BUTTONS,
-  AUTOCLICKER_WORK_TIME_MODIFIER_MS,
   MIN_AUTOCLICKER_TIME_RANGE, // In seconds
   MAX_AUTOCLICKER_TIME_RANGE,
   MIN_AUTOCLICKER_FREQUENCY_RANGE, // In seconds
   MAX_AUTOCLICKER_FREQUENCY_RANGE,
   AUTOCLICKER_INITIAL_ZERO_TIME,
-} = CONSTANTS;
+  AUTOCLICK_LABEL_INPUT_TEXT_GROUPS,
+  AUTOCLICK_BUTTONS,
+  AUTOCLICKER_WORK_TIME_MODIFIER,
+  AUTOCLICKER_WORK_TIME_MODIFIER_MS,
+} = CONSTANTS_AUTOCLICKER;
 
 class AutoClicker extends Component {
   constructor(props) {
@@ -40,7 +41,7 @@ class AutoClicker extends Component {
     this.handleAutoClickStart();
   }
 
-  handleAutoClickMaxTime = ({ target: { value } }) => {
+  handleChangeAutoClickMaxTime = ({ target: { value } }) => {
     this.setState({
       autoClickMaxTime: normalizeValueInRange(
         Number(value),
@@ -50,7 +51,7 @@ class AutoClicker extends Component {
     });
   };
 
-  handleAutoClickFrequency = ({ target: { value } }) => {
+  handleChangeAutoClickFrequency = ({ target: { value } }) => {
     this.setState({
       autoClickFrequency: normalizeValueInRange(
         Number(value),
@@ -143,19 +144,15 @@ class AutoClicker extends Component {
   }
 
   showAutoclickLabelInputTextGroups = (ITEM, i) => (
-    <LabelInputTextGroup
+    <LabeledInput
       key={i}
       blockName="auto-click"
       elementName={ITEM.ELEMENT_NAME}
+      type="number"
       textContent={'Auto click ' + ITEM.TEXT_CONTENT + ':'}
       isContentBefore={true}
-      inputTextType="number"
-      inputValue={this.state[ITEM.VALUE_NAME]}
-      // Значенням є коллбек обробника, назва якого формується за допомогою функції makeHandlerNameByHandleValue
-      // Яка формує назву обробника, на основі назви оброблюємого значення
-      inputOnChangeCallback={
-        this[makeHandlerNameByHandleValue(ITEM.VALUE_NAME)]
-      }
+      value={this.state[ITEM.VALUE_NAME]}
+      onChange={this[makeHandlerNameByHandleValue('Change' + ITEM.VALUE_NAME)]}
     />
   );
 
