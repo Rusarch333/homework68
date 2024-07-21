@@ -5,12 +5,16 @@ import styles from './AutoClicker.module.sass';
 import CONSTANTS from '../../../constants';
 import CONSTANTS_AUTOCLICKER from './constants';
 import {
+  makeFirstLetterUppercase,
   normalizeValueInRange,
-  makeHandlerNameByHandleValue,
 } from '../../../utils/utils';
 
-const { MIN_COUNT_RANGE, INITIAL_STEP_VALUE, INITIAL_ISADD_FLAG_VALUE } =
-  CONSTANTS;
+const {
+  MIN_COUNT_RANGE,
+  MAX_COUNT_RANGE,
+  INITIAL_STEP_VALUE,
+  INITIAL_ISADD_FLAG_VALUE,
+} = CONSTANTS;
 
 const {
   MIN_AUTOCLICKER_TIME_RANGE, // In seconds
@@ -109,7 +113,9 @@ class AutoClicker extends Component {
 
           // Розраховуємо та оновлюємо значення лічильника
           const newCount = isAdd ? count + step : count - step;
-          setCount(normalizeValueInRange(newCount));
+          setCount(
+            normalizeValueInRange(newCount, MIN_COUNT_RANGE, MAX_COUNT_RANGE)
+          );
         }
 
         // Перевіряємо чи потрібно запускати наступний часовий інтервал
@@ -152,7 +158,9 @@ class AutoClicker extends Component {
       textContent={'Auto click ' + ITEM.TEXT_CONTENT + ':'}
       isContentBefore={true}
       value={this.state[ITEM.VALUE_NAME]}
-      onChange={this[makeHandlerNameByHandleValue('Change' + ITEM.VALUE_NAME)]}
+      onChange={
+        this['handleChange' + makeFirstLetterUppercase(ITEM.VALUE_NAME)]
+      }
     />
   );
 

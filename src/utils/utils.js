@@ -1,48 +1,64 @@
-import CONSTANTS from '../constants';
-
-const { MIN_COUNT_RANGE, MAX_COUNT_RANGE } = CONSTANTS;
-
-const handle_PREFIX = `handle`;
-
+/**
+ * Утиліта створює БЕМ назву, на основі вхідних параметрів
+ * @param {string} blockName - назва блоку із БЕМ
+ * @param {string} tagName - назва тегу, складова назви елементу із БЕМ
+ * @param {string} elementEntityName - назва сутності елементу, складова назви елементу із БЕМ
+ * @param {string} modifierName  - назва модифікатору із БЕМ
+ * @returns {string} БЕМ назва створена на основі вхідних параметрів
+ */
 export const createElementBEMNameByTag = (
   blockName,
   tagName,
-  elementName,
+  elementEntityName,
   modifierName
 ) => {
-  const blockElementName = blockName + '__' + tagName + '-' + elementName;
+  const blockElementName = blockName + '__' + tagName + '-' + elementEntityName;
   return modifierName === null
     ? blockElementName
     : blockElementName + '--' + modifierName;
 };
 
+/**
+ * Утиліта приймає слово, та повертає його з великої літери
+ * @param {string} word - вхідне слово
+ * @returns {string} - вхідне слово з великої літери
+ */
 export const makeFirstLetterUppercase = (word) =>
   word.charAt(0).toUpperCase() + word.slice(1);
 
-export const makeHandlerNameByHandleValue = (value) =>
-  handle_PREFIX + makeFirstLetterUppercase(value);
-
+/**
+ * Утиліта, яка виконує задану дію, якщо передане значення знаходиться у заданому діапазоні
+ * @param {number} value - значення, яке треба перевірити, щодо відповідності до діапазону
+ * @param {function} doAction - дія, яку треба виконати при виконанні умови
+ * @param {number} minValueRange - мінімальне значення діапазону
+ * @param {number} maxValueRange - максимальне значення діапазону
+ */
 export const doActionIfValueInRange = (
   value,
   doAction,
-  minCountRange = MIN_COUNT_RANGE,
-  maxCountRange = MAX_COUNT_RANGE
+  minValueRange,
+  maxValueRange
 ) => {
-  if (value >= minCountRange && value <= maxCountRange) {
+  if (value >= minValueRange && value <= maxValueRange) {
     doAction(value);
   }
 };
 
-export const normalizeValueInRange = (
-  value,
-  minCountRange = MIN_COUNT_RANGE,
-  maxCountRange = MAX_COUNT_RANGE
-) => {
-  if (value <= minCountRange) {
-    return minCountRange;
+/**
+ * Утиліта, яка нормалізує вхідне значення, якщо воно виходить за заданий діапазон
+ * @param {number} value - значення, яке треба перевірити, щодо відповідності до діапазону
+ * @param {number} minValueRange - мінімальне значення діапазону
+ * @param {number} maxValueRange - максимальне значення діапазону
+ * @returns {number} minValueRange - при умові, що: (value <= minValueRange)
+ * @returns {number} maxValueRange - при умові, що: (value >= maxValueRange)
+ * @returns {number} value - при умові, що значення у заданому діапазоні
+ */
+export const normalizeValueInRange = (value, minValueRange, maxValueRange) => {
+  if (value <= minValueRange) {
+    return minValueRange;
   }
-  if (value >= maxCountRange) {
-    return maxCountRange;
+  if (value >= maxValueRange) {
+    return maxValueRange;
   } else {
     return value;
   }

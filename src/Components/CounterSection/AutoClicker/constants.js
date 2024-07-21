@@ -6,7 +6,7 @@ const CONSTANTS = {
   AUTOCLICKER_INITIAL_ZERO_TIME: 0,
   AUTOCLICK_LABEL_INPUT_TEXT_GROUPS: [
     {
-      ELEMENT_NAME: 'time',
+      ELEMENT_NAME: 'max-time',
       TEXT_CONTENT: 'max time',
       VALUE_NAME: 'autoClickMaxTime',
     },

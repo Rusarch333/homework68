@@ -5,8 +5,12 @@ import styles from './Counter.module.sass';
 import { normalizeValueInRange } from '../../../utils/utils';
 import CONSTANTS from '../../../constants';
 
-const { MIN_COUNT_RANGE, INITIAL_STEP_VALUE, INITIAL_ISADD_FLAG_VALUE } =
-  CONSTANTS;
+const {
+  MIN_COUNT_RANGE,
+  MAX_COUNT_RANGE,
+  INITIAL_STEP_VALUE,
+  INITIAL_ISADD_FLAG_VALUE,
+} = CONSTANTS;
 
 const Counter = ({
   count = MIN_COUNT_RANGE,
@@ -17,7 +21,7 @@ const Counter = ({
 }) => {
   const handleClickOperationButton = () => {
     const newCount = isAdd ? count + step : count - step;
-    setCount(normalizeValueInRange(newCount));
+    setCount(normalizeValueInRange(newCount, MIN_COUNT_RANGE, MAX_COUNT_RANGE));
   };
 
   const handleClickChangeMode = () => {

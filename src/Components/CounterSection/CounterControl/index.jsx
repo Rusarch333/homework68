@@ -5,11 +5,16 @@ import styles from './CounterControl.module.sass';
 import { doActionIfValueInRange } from '../../../utils/utils';
 import CONSTANTS from '../../../constants';
 
-const { INITIAL_STEP_VALUE } = CONSTANTS;
+const { MIN_COUNT_RANGE, MAX_COUNT_RANGE, INITIAL_STEP_VALUE } = CONSTANTS;
 
 const ControlCounter = ({ step = INITIAL_STEP_VALUE, setStep }) => {
   const handleChangeStep = ({ target: { value } }) => {
-    doActionIfValueInRange(Number(value), setStep);
+    doActionIfValueInRange(
+      Number(value),
+      setStep,
+      MIN_COUNT_RANGE,
+      MAX_COUNT_RANGE
+    );
   };
 
   const COMPONENT_NAME = 'control-counter';
