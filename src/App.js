@@ -1,4 +1,4 @@
-import CounterSection from './Components/CounterSection';
+import CounterSection from './components/CounterSection';
 
 function App() {
   return (
