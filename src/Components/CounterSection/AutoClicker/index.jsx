@@ -35,7 +35,7 @@ class AutoClicker extends Component {
       autoClickMaxTime: 5,
       autoClickFrequency: MIN_AUTOCLICKER_FREQUENCY_RANGE,
       autoClickCurrentTime: AUTOCLICKER_INITIAL_ZERO_TIME,
-      isAutoclickerNeedReset: false,
+      isAutoclickerReseted: true,
     };
     this.autoclickerFrequencyInterval = null;
     this.nextClickTime = AUTOCLICKER_INITIAL_ZERO_TIME;
@@ -66,32 +66,28 @@ class AutoClicker extends Component {
   };
 
   handleAutoClickStart = () => {
-    // Виконуємо код обробника, тільки якщо автоклікер зараз зупинений ("stoped")!
+    // Виконуємо код обробника, тільки якщо автоклікер зараз зупинений!
     if (this.autoclickerFrequencyInterval === null) {
       const {
         autoClickCurrentTime,
         autoClickMaxTime,
         autoClickFrequency,
-        isAutoclickerNeedReset,
+        isAutoclickerReseted,
       } = this.state;
-
-      console.log(isAutoclickerNeedReset);
 
       let newAutoClickCurrentTime;
 
-      if (isAutoclickerNeedReset) {
+      if (isAutoclickerReseted) {
         newAutoClickCurrentTime = AUTOCLICKER_INITIAL_ZERO_TIME;
         this.setState((state, props) => ({
           autoClickCurrentTime: newAutoClickCurrentTime,
-          isAutoclickerNeedReset: !isAutoclickerNeedReset,
+          isAutoclickerReseted: !isAutoclickerReseted,
         }));
         // Вираховуємо час до наступного кліку (відповідно від встановленої частоти кліків)
         this.nextClickTime = autoClickFrequency;
       } else {
         newAutoClickCurrentTime = autoClickCurrentTime;
       }
-
-      console.log(autoClickCurrentTime);
 
       // Запускаємо інтервали автоклікеру, по-замовчуванню 1 інтервал - це 1 секунда
       this.autoclickerFrequencyInterval = setInterval(() => {
@@ -100,9 +96,6 @@ class AutoClicker extends Component {
         this.setState((state, props) => ({
           autoClickCurrentTime: newAutoClickCurrentTime,
         }));
-
-        console.log('newAutoClickCurrentTime', newAutoClickCurrentTime);
-        console.log('nextClickTime', this.nextClickTime);
 
         // Код в умові виконується, якщо настав час зробити клік, згідно частоти кліків
         if (newAutoClickCurrentTime === this.nextClickTime) {
@@ -123,7 +116,7 @@ class AutoClicker extends Component {
         if (newAutoClickCurrentTime + 1 > autoClickMaxTime) {
           this.handleAutoClickStop();
           this.setState((state, props) => ({
-            isRunning: false,
+            isAutoclickerReseted: true,
           }));
         }
       }, AUTOCLICKER_WORK_TIME_MODIFIER_MS); // End of newAutoclickerFrequencyInterval
@@ -139,7 +132,7 @@ class AutoClicker extends Component {
     this.handleAutoClickStop();
     this.setState({
       autoClickCurrentTime: AUTOCLICKER_INITIAL_ZERO_TIME,
-      isRunning: false,
+      isAutoclickerReseted: true,
     });
     const { setCount } = this.props;
     setCount(MIN_COUNT_RANGE);
