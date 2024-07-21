@@ -1,0 +1,44 @@
+@use '/src/common/styles/__colors' as *
+@use '/src/common/styles/__sizes' as *
+@use '/src/common/styles/__templates' as *
+
+.auto-click
+  padding-top: $verticalSpaceSize
+  padding-bottom: $verticalSpaceSize
+  color: $white
+  background-color: $green
+  @extend %standartFont
+
+.auto-click__component-title
+  display: block
+  padding-bottom: $verticalSpaceSize
+  font-size: 1.15rem
+  text-transform: uppercase
+
+.auto-click__form-params
+  width: 260px
+  margin: auto
+
+.auto-click input
+  width: 80px
+  border: 1px solid $input-border-color
+  border-radius: $borderRadius
+  margin-left: $formElementMarginLeft
+  color: $grey
+
+.auto-click__input-frequency
+  margin-top: 0.65rem
+
+.auto-click__span-current-time
+  display: block
+  margin-top: $verticalSpaceSize
+
+.auto-click button
+  margin: auto
+  margin-top: $verticalSpaceSize
+  margin-right: 1rem
+  color: #15531d
+  background-color: $white
+
+.auto-click button:hover
+  background-color: #b1c7b1

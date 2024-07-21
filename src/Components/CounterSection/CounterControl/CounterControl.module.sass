@@ -1,0 +1,20 @@
+@use '/src/common/styles/__colors' as *
+@use '/src/common/styles/__sizes' as *
+@use '/src/common/styles/__templates' as *
+  
+.control-counter
+  padding-top: $verticalSpaceSize
+  padding-bottom: $verticalSpaceSize
+  color: $white
+  background-color: $green
+
+.control-counter__label-step
+  display: inline-block
+  @extend %standartFont
+
+.control-counter__input-step
+  width: 80px
+  border: 1px solid $input-border-color
+  border-radius: $borderRadius
+  margin-left: $formElementMarginLeft
+  color: $grey
