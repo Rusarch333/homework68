@@ -1,2 +1,17 @@
-@use '/src/Components/CounterSection/AutoClicker/AutoClicker.module.sass' as *
-@use '/src/Components/CounterSection/CounterControl/CounterControl.module.sass' as *
+@use '/src/common/styles/__colors' as *
+@use '/src/common/styles/__sizes' as *
+@use '/src/common/styles/__templates' as *
+
+.auto-click__input-frequency
+  margin-top: 0.65rem
+
+.control-counter__label-step
+  display: inline-block
+  @extend %standartFont
+
+.control-counter__input-step
+  width: 80px
+  border: 1px solid $input-border-color
+  border-radius: $borderRadius
+  margin-left: $formElementMarginLeft
+  color: $grey

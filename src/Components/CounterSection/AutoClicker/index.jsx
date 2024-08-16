@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import LabeledInput from '../LabeledInput';
 import styles from './AutoClicker.module.sass';
+import LabeledInput from '../LabeledInput';
 import CONSTANTS from '../../../constants';
 import CONSTANTS_AUTOCLICKER from './constants';
 import {

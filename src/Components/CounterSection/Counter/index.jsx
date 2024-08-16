@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import LabeledInput from '../LabeledInput';
 import styles from './Counter.module.sass';
 import { normalizeValueInRange } from '../../../utils/utils';
+import LabeledInput from '../LabeledInput';
 import CONSTANTS from '../../../constants';
 
 const {

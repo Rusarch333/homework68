@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
+import styles from './CounterSection.module.sass';
 import CounterControl from './CounterControl';
 import Counter from './Counter';
 import AutoClicker from './AutoClicker';
-import styles from './CounterSection.module.sass';
 import CONSTANTS from '../../constants';
 
 const { MIN_COUNT_RANGE, INITIAL_STEP_VALUE, INITIAL_ISADD_FLAG_VALUE } =

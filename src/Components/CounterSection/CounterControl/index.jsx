@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import LabeledInput from '../LabeledInput';
 import styles from './CounterControl.module.sass';
 import { doActionIfValueInRange } from '../../../utils/utils';
+import LabeledInput from '../LabeledInput';
 import CONSTANTS from '../../../constants';
 
 const { MIN_COUNT_RANGE, MAX_COUNT_RANGE, INITIAL_STEP_VALUE } = CONSTANTS;
