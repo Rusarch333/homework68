@@ -59,7 +59,6 @@ export const normalizeValueInRange = (value, minValueRange, maxValueRange) => {
   }
   if (value >= maxValueRange) {
     return maxValueRange;
-  } else {
-    return value;
   }
+    return value;
 };
