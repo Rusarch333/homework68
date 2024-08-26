@@ -134,8 +134,6 @@ class AutoClicker extends Component {
       autoClickCurrentTime: AUTOCLICKER_INITIAL_ZERO_TIME,
       isAutoclickerReseted: true,
     });
-    const { setCount } = this.props;
-    setCount(MIN_COUNT_RANGE);
   };
 
   componentWillUnmount() {
