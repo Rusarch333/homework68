@@ -79,10 +79,10 @@ class AutoClicker extends Component {
 
       if (isAutoclickerReseted) {
         newAutoClickCurrentTime = AUTOCLICKER_INITIAL_ZERO_TIME;
-        this.setState((state, props) => ({
+        this.setState({
           autoClickCurrentTime: newAutoClickCurrentTime,
-          isAutoclickerReseted: !isAutoclickerReseted,
-        }));
+          isAutoclickerReseted: !isAutoclickerReseted
+        });
         // Вираховуємо час до наступного кліку (відповідно від встановленої частоти кліків)
         this.nextClickTime = autoClickFrequency;
       } else {
